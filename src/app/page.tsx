@@ -195,26 +195,26 @@ export default function BucketSortStudio() {
   const step = steps[currentStep] || { array: [], buckets: [], type: 'init', description: '' };
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-100 font-sans selection:bg-violet-500/30">
+    <div className="min-h-screen bg-[#f8fafc] text-slate-900 font-sans selection:bg-indigo-500/30">
       {/* Header */}
-      <header className="border-b border-white/5 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+      <header className="border-b border-slate-200 bg-white/50 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-violet-500 rounded-lg flex items-center justify-center shadow-lg shadow-violet-500/20">
-              <LayoutGrid className="text-slate-950 w-5 h-5" />
+            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-600/20">
+              <LayoutGrid className="text-white w-5 h-5" />
             </div>
-            <h1 className="font-black italic tracking-tighter text-xl uppercase tracking-widest text-violet-400">Bucket_Sort_Studio</h1>
+            <h1 className="font-black italic tracking-tighter text-xl uppercase tracking-widest text-indigo-600">Bucket_Sort_Studio</h1>
           </div>
           <div className="flex items-center gap-6">
-            <div className="hidden md:flex items-center gap-4 text-[10px] mono uppercase text-slate-500 font-black tracking-widest">
+            <div className="hidden md:flex items-center gap-4 text-[10px] mono uppercase text-slate-400 font-black tracking-widest">
               <div className="flex items-center gap-2">
-                <div className={`w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-violet-400 animate-pulse' : 'bg-slate-700'}`} />
-                {isPlaying ? 'Filtering' : 'Idle'}
+                <div className={`w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-indigo-600 animate-pulse' : 'bg-slate-300'}`} />
+                {isPlaying ? '仕分け中' : '待機中'}
               </div>
               <span className="opacity-20">|</span>
               <span>Buckets: {NUM_BUCKETS}</span>
             </div>
-            <a href="https://github.com/iidaatcnt/sorting-studio-bucket" target="_blank" rel="noreferrer" className="text-slate-600 hover:text-white transition-colors">
+            <a href="https://github.com/iidaatcnt/sorting-studio-bucket" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-slate-900 transition-colors">
               <Github size={20} />
             </a>
           </div>
@@ -225,15 +225,15 @@ export default function BucketSortStudio() {
         {/* Left: Visualization */}
         <div className="lg:col-span-8 flex flex-col gap-8">
 
-          <div className="relative aspect-video lg:aspect-square max-h-[500px] bg-[#030712] rounded-[3rem] border border-white/5 p-12 flex flex-col gap-12 overflow-hidden shadow-2xl">
-            <div className="absolute top-8 left-12 flex items-center gap-3 mono text-[9px] text-slate-600 uppercase font-black tracking-[0.2em] z-10">
-              <Container size={14} className="text-violet-500" />
-              Range-Based Partitioning // Bucket Logistics
+          <div className="relative aspect-video lg:aspect-square max-h-[500px] bg-white rounded-[3rem] border border-slate-200 p-12 flex flex-col gap-12 overflow-hidden shadow-xl">
+            <div className="absolute top-8 left-12 flex items-center gap-3 mono text-[9px] text-slate-400 uppercase font-black tracking-[0.2em] z-10">
+              <Container size={14} className="text-indigo-600" />
+              バケツソート・シミュレーター
             </div>
 
             {/* Main Array Slot */}
-            <div className="flex-1 flex items-end justify-center gap-3 px-10 pb-8 border-b border-white/5 relative">
-              <div className="absolute top-0 left-0 text-[10px] mono text-slate-800 font-black uppercase tracking-widest">Main Buffer</div>
+            <div className="flex-1 flex items-end justify-center gap-3 px-10 pb-8 border-b border-slate-100 relative">
+              <div className="absolute top-0 left-0 text-[10px] mono text-slate-300 font-black uppercase tracking-widest">メイン・バッファ</div>
               <AnimatePresence mode="popLayout" initial={false}>
                 {step.array.map((val, idx) => {
                   const isProcessing = step.currentIndex === idx;
@@ -245,10 +245,10 @@ export default function BucketSortStudio() {
                       layout
                       transition={{ type: 'spring', damping: 25, stiffness: 400 }}
                       style={{ height: `${height}%` }}
-                      className={`flex-1 min-w-[30px] rounded-t-xl relative ${val === null ? 'bg-transparent border-dashed border-white/5 border-2' : 'bg-slate-800'} ${isProcessing ? 'bg-violet-500 shadow-[0_0_20px_rgba(139,92,246,0.5)]' : ''} transition-all duration-300`}
+                      className={`flex-1 min-w-[30px] rounded-t-xl relative ${val === null ? 'bg-transparent border-dashed border-slate-100 border-2' : 'bg-slate-100'} ${isProcessing ? 'bg-indigo-600 shadow-[0_0_20px_rgba(79,70,229,0.3)]' : ''} transition-all duration-300`}
                     >
                       {val !== null && (
-                        <div className={`absolute -top-8 left-1/2 -translate-x-1/2 mono text-[10px] font-black ${isProcessing ? 'text-white' : 'text-slate-700'}`}>
+                        <div className={`absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] font-black ${isProcessing ? 'text-indigo-600' : 'text-slate-300'}`}>
                           {val}
                         </div>
                       )}
@@ -260,12 +260,12 @@ export default function BucketSortStudio() {
 
             {/* Buckets */}
             <div className="grid grid-cols-5 gap-3 h-40 relative">
-              <div className="absolute -top-6 left-0 text-[10px] mono text-slate-800 font-black uppercase tracking-widest">Active Buckets</div>
+              <div className="absolute -top-6 left-0 text-[10px] mono text-slate-300 font-black uppercase tracking-widest font-bold">アクティブ・バケツ</div>
               {step.buckets.map((bucket, i) => {
                 const isActive = step.currentBucket === i;
                 return (
-                  <div key={i} className={`flex flex-col-reverse items-center gap-1 bg-white/5 rounded-2xl border transition-all duration-500 ${isActive ? 'border-violet-500/50 bg-violet-500/5 pt-2' : 'border-white/5'} p-2 overflow-hidden relative`}>
-                    <div className="text-[10px] mono font-black text-slate-800 border-b border-white/5 w-full text-center pb-2 mb-1">
+                  <div key={i} className={`flex flex-col-reverse items-center gap-1 bg-slate-50 rounded-2xl border transition-all duration-500 ${isActive ? 'border-indigo-600/30 bg-indigo-50/50 pt-2' : 'border-slate-100'} p-2 overflow-hidden relative`}>
+                    <div className="text-[10px] mono font-black text-slate-400 border-b border-slate-100 w-full text-center pb-2 mb-1">
                       {i * 20}-{((i + 1) * 20)}
                     </div>
                     <AnimatePresence>
@@ -275,7 +275,7 @@ export default function BucketSortStudio() {
                           initial={{ y: -50, scale: 0.8, opacity: 0 }}
                           animate={{ y: 0, scale: 1, opacity: 1 }}
                           exit={{ y: 100, opacity: 0 }}
-                          className="w-full bg-violet-600/20 py-1.5 rounded-lg text-[10px] mono font-black text-violet-300 text-center border border-violet-500/10 shadow-sm"
+                          className="w-full bg-indigo-600/10 py-1.5 rounded-lg text-[10px] mono font-black text-indigo-600 text-center border border-indigo-200/50 shadow-sm"
                         >
                           {val}
                         </motion.div>
@@ -284,7 +284,7 @@ export default function BucketSortStudio() {
                     {isActive && (
                       <motion.div
                         layoutId="bucket-active"
-                        className="absolute inset-0 border-2 border-violet-500/30 rounded-2xl pointer-events-none"
+                        className="absolute inset-0 border-2 border-indigo-600/20 rounded-2xl pointer-events-none"
                       />
                     )}
                   </div>
@@ -293,36 +293,36 @@ export default function BucketSortStudio() {
             </div>
           </div>
 
-          <div className="px-10 py-8 bg-slate-900/50 rounded-[2.5rem] border border-white/10 flex flex-col gap-8 shadow-inner">
+          <div className="px-10 py-8 bg-white rounded-[2.5rem] border border-slate-200 flex flex-col gap-8 shadow-lg">
             <div className="flex flex-col md:flex-row items-center gap-10">
               <div className="flex items-center gap-2">
-                <button onClick={stepBackward} className="p-4 bg-slate-800 rounded-2xl hover:bg-slate-700 transition-colors text-slate-400"><StepBack size={20} /></button>
+                <button onClick={stepBackward} className="p-4 bg-slate-100 text-slate-400 rounded-2xl hover:bg-slate-200 transition-colors"><StepBack size={20} /></button>
                 <button
                   onClick={() => setIsPlaying(!isPlaying)}
-                  className="w-20 h-20 bg-violet-600 text-white rounded-[2rem] flex items-center justify-center hover:bg-violet-400 transition-all active:scale-95 shadow-xl shadow-violet-500/20"
+                  className="w-20 h-20 bg-indigo-600 text-white rounded-[2rem] flex items-center justify-center hover:bg-indigo-500 transition-all active:scale-95 shadow-xl shadow-indigo-600/20"
                 >
                   {isPlaying ? <Pause fill="currentColor" size={24} /> : <Play fill="currentColor" size={24} className="ml-1" />}
                 </button>
-                <button onClick={stepForward} className="p-4 bg-slate-800 rounded-2xl hover:bg-slate-700 transition-colors text-slate-400"><StepForward size={20} /></button>
-                <button onClick={reset} className="p-4 bg-slate-800 rounded-2xl hover:bg-slate-700 transition-colors text-slate-400 ml-4"><RotateCcw size={20} /></button>
+                <button onClick={stepForward} className="p-4 bg-slate-100 text-slate-400 rounded-2xl hover:bg-slate-200 transition-colors"><StepForward size={20} /></button>
+                <button onClick={reset} className="p-4 bg-slate-100 text-slate-400 rounded-2xl hover:bg-slate-200 transition-colors ml-4"><RotateCcw size={20} /></button>
               </div>
 
               <div className="flex-1 w-full text-center md:text-left">
-                <div className="flex items-center justify-between mono text-[10px] text-slate-500 uppercase font-black tracking-widest mb-3">
-                  <span>Logic Speed</span>
-                  <span className="text-violet-400">{speed}ms</span>
+                <div className="flex items-center justify-between mono text-[10px] text-slate-400 uppercase font-black tracking-widest mb-3 font-bold">
+                  <span>再生スピード</span>
+                  <span className="text-indigo-600 font-bold">{speed}ms</span>
                 </div>
                 <div className="flex gap-4 items-center">
-                  <input type="range" min="100" max="980" value={speed} onChange={(e) => setSpeed(parseInt(e.target.value))} className="flex-1 appearance-none bg-slate-800 h-1.5 rounded-full accent-violet-500 cursor-pointer" />
+                  <input type="range" min="100" max="980" value={speed} onChange={(e) => setSpeed(parseInt(e.target.value))} className="flex-1 appearance-none bg-slate-100 h-1.5 rounded-full accent-indigo-600 cursor-pointer" />
                 </div>
               </div>
             </div>
 
-            <div className="p-6 bg-violet-500/5 rounded-2xl border border-violet-500/10 flex gap-4">
-              <div className="mt-1 p-2 bg-violet-500/10 rounded-xl shrink-0">
-                <Zap size={16} className="text-violet-400" />
+            <div className="p-6 bg-slate-50 border border-slate-100 rounded-2xl flex gap-4">
+              <div className="mt-1 p-2 bg-white border border-slate-200 rounded-xl shrink-0 shadow-sm">
+                <Zap size={16} className="text-slate-400" />
               </div>
-              <p className="text-sm text-slate-400 leading-relaxed font-medium italic">
+              <p className="text-sm text-slate-500 leading-relaxed font-medium">
                 {step.description}
               </p>
             </div>
@@ -331,43 +331,43 @@ export default function BucketSortStudio() {
 
         {/* Right: Code & Theory */}
         <div className="lg:col-span-4 flex flex-col gap-8">
-          <div className="p-8 bg-zinc-900/80 border border-white/5 rounded-[3rem] shadow-2xl">
+          <div className="p-10 bg-white border border-slate-200 rounded-[3rem] shadow-lg">
             <div className="flex items-center gap-3 mb-8">
-              <Lightbulb className="text-amber-400 w-5 h-5" />
-              <h2 className="font-black text-xs uppercase tracking-[0.2em] text-slate-400">Concept_Data</h2>
+              <Lightbulb className="text-amber-500 w-5 h-5" />
+              <h2 className="font-black text-xs uppercase tracking-[0.2em] text-slate-400">学習ガイド</h2>
             </div>
-            <div className="p-6 bg-black/40 rounded-3xl border border-white/5 mb-8">
-              <h3 className="text-violet-400 font-black mb-3 text-sm">Bucket Sort</h3>
-              <p className="text-[11px] text-slate-500 leading-relaxed">
+            <div className="p-6 bg-slate-50 border border-slate-100 rounded-3xl mb-8">
+              <h3 className="text-indigo-600 font-black mb-3 text-sm">Bucket Sort</h3>
+              <p className="text-[11px] text-slate-500 leading-relaxed font-medium">
                 データをいくつかの範囲（バケツ）に振り分け、バケツの中で整列してから最後に戻すアルゴリズム。データの分布が均一な場合に、驚異的なスピードを発揮します。
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-3 mono text-[9px] font-black uppercase tracking-tighter">
-              <div className="p-4 bg-white/5 rounded-2xl text-center border border-white/5 hover:border-violet-500/20 transition-colors">
-                <span className="text-slate-600 block mb-1">Avg Case</span>
-                <span className="text-violet-300">O(N + K)</span>
+            <div className="grid grid-cols-2 gap-3 mono text-[9px] font-black uppercase tracking-tighter font-bold">
+              <div className="p-4 bg-slate-50 border border-slate-100 rounded-2xl text-center">
+                <span className="text-slate-400 block mb-1">Avg Case</span>
+                <span className="text-indigo-600">O(N + K)</span>
               </div>
-              <div className="p-4 bg-white/5 rounded-2xl text-center border border-white/5 hover:border-violet-500/20 transition-colors">
-                <span className="text-slate-600 block mb-1">Space</span>
-                <span className="text-pink-400">O(N)</span>
+              <div className="p-4 bg-slate-50 border border-slate-100 rounded-2xl text-center">
+                <span className="text-slate-400 block mb-1">Space</span>
+                <span className="text-indigo-600">O(N)</span>
               </div>
             </div>
           </div>
 
-          <div className="p-8 bg-black border border-white/5 rounded-[3rem] flex-1 flex flex-col min-h-[450px]">
+          <div className="p-10 bg-[#0f172a] border border-slate-800 rounded-[3rem] flex-1 flex flex-col min-h-[450px] shadow-2xl">
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-3">
-                <Code2 className="text-slate-600 w-5 h-5" />
-                <h2 className="font-black text-[10px] uppercase tracking-widest text-slate-500">Exec_Kernel</h2>
+                <Code2 className="text-slate-400 w-5 h-5" />
+                <h2 className="font-black text-[10px] uppercase tracking-widest text-slate-500">Python 実装例</h2>
               </div>
-              <div className="w-2 h-2 rounded-full bg-violet-500/50 shadow-[0_0_10px_rgba(139,92,246,0.5)]" />
+              <div className="w-2 h-2 rounded-full bg-indigo-500" />
             </div>
 
-            <div className="flex-1 bg-zinc-950/30 p-8 rounded-3xl mono text-[10px] leading-loose overflow-auto border border-white/5 scrollbar-hide">
+            <div className="flex-1 bg-black/20 p-8 rounded-3xl mono text-[10px] leading-loose overflow-auto border border-slate-800 scrollbar-hide text-slate-300 font-bold">
               {CODE_PYTHON.map((line, i) => (
                 <div
                   key={i}
-                  className={`flex gap-6 transition-all duration-300 ${step.codeLine === i ? 'text-violet-400 bg-violet-400/10 -mx-8 px-8 border-l-2 border-violet-400 font-bold' : 'text-slate-800'}`}
+                  className={`flex gap-6 transition-all duration-300 ${step.codeLine === i ? 'text-indigo-400 bg-indigo-500/10 -mx-8 px-8 border-l-2 border-indigo-400 font-bold' : 'text-slate-800'}`}
                 >
                   <span className="text-slate-900 tabular-nums w-4 select-none opacity-50">{i + 1}</span>
                   <pre className="whitespace-pre">{line}</pre>
@@ -381,10 +381,10 @@ export default function BucketSortStudio() {
         </div>
       </main>
 
-      <footer className="mt-20 border-t border-white/5 py-16 text-center">
+      <footer className="mt-20 border-t border-slate-200 py-16 text-center">
         <div className="max-w-7xl mx-auto flex flex-col items-center gap-6">
-          <LayoutGrid className="text-slate-900 w-8 h-8 opacity-20" />
-          <p className="text-[8px] mono text-slate-700 uppercase tracking-[0.8em]">Interactive_Learning_Series // Informatics_I</p>
+          <LayoutGrid className="text-slate-200 w-8 h-8 opacity-20" />
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.4em]">Fundamental Wisdom for the AI Era // Algorithm Literacy // しろいプログラミング教室</p>
         </div>
       </footer>
     </div>
